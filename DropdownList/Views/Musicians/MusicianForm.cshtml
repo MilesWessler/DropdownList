@@ -1,0 +1,29 @@
+﻿@model DropdownList.ViewModel.MusicianFormViewModel
+
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Musician</h2>
+
+@using (Html.BeginForm("Save", "Musicians"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Musician.Name)
+        @Html.TextBoxFor(m => m.Musician.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Musician.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Musician.InstrumentId)
+        @Html.DropDownListFor(m => m.Musician.InstrumentId, new SelectList(Model.Instruments, "Id", "Name"), " Select Instrument", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Musician.InstrumentId)
+    </div>
+
+    @Html.HiddenFor(c => c.Musician.Id);
+
+    <button type="submit" class="btn btn btn-primary">Save</button>
+
+}
+
